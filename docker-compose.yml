@@ -1,0 +1,50 @@
+version: "3.9"
+
+services:
+  postgresdb:
+    image: postgres:15
+    container_name: postgresdb
+    environment:
+      POSTGRES_DB: assignment
+      POSTGRES_USER: admin
+      POSTGRES_PASSWORD: root
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+    networks:
+      - db-network
+    ports:
+      - "5432:5432"
+  
+  postgres-client:
+    image: postgres:15
+    container_name: postgres-client
+    depends_on:
+      - postgresdb
+    entrypoint: ["tail", "-f", "/dev/null"]
+    networks:
+      - db-network
+
+  backend:
+    build:
+      context: ./backend
+    depends_on:
+      - postgresdb
+    environment:
+      SPRING_DATASOURCE_URL: jdbc:postgresql://postgresdb:5432/assignment
+      SPRING_DATASOURCE_USERNAME: admin
+      SPRING_DATASOURCE_PASSWORD: root
+    ports:
+      - "8080:8080"
+    networks:
+      - db-network
+    volumes:
+      - ./backend:/app
+      - ~/.m2:/root/.m2
+    working_dir: /app
+    command: mvn spring-boot:run -Dspring-boot.run.fork=false
+  
+volumes:
+  postgres_data:
+
+networks:
+  db-network:
