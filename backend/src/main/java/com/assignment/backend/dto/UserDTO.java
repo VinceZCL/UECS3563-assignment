@@ -18,7 +18,7 @@ public class UserDTO {
 	private String username;
 	
 	public static UserDTO toDTO(User user) {
-		UserDTO dto = new UserDTO(user.getUser_id(), user.getName());
+		UserDTO dto = new UserDTO(user.getId(), user.getName());
 		return dto;
 	}
 }

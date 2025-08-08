@@ -25,8 +25,10 @@ public class Report {
 
 	@Id
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
-	private Long report_id;
-	private Long user_id;
+	@Column(name="report_id")
+	private Long id;
+	@Column(name="user_id")
+	private Long userId;
 	private String yesterday;
 	private String today;
 	private String blockers;
