@@ -5,6 +5,7 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -41,6 +42,13 @@ public class ReportController {
 	public ResponseEntity<Report> addReport(@RequestBody Report rep) {
 		log.info("POST /api/reports invoked");
 		return ResponseEntity.status(HttpStatus.CREATED).body(reportService.saveReport(rep));
+	}
+	
+	@DeleteMapping("/report/{id}")
+	public ResponseEntity<Void> deleteReport(@PathVariable Long id) {
+		log.info("DELETE /api/report/{id} invoked with id="+id);
+		reportService.deleteReport(id);
+		return ResponseEntity.noContent().build();
 	}
 	
 }

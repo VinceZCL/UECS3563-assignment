@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.assignment.backend.dto.UserDTO;
+import com.assignment.backend.dto.UserRequest;
 import com.assignment.backend.exception.InvalidRequestException;
 import com.assignment.backend.exception.UserNotFoundException;
 import com.assignment.backend.model.User;
@@ -31,7 +32,10 @@ public class UserService {
 		return convertToDTO(user);
 	}
 	
-	public UserDTO saveUser(User user) {
+	public UserDTO saveUser(UserRequest userReq) {
+		User user = new User();
+		user.setName(userReq.getName());
+		user.setPassword(userReq.getPassword());
 		User saved = userRepository.save(user);
 		return convertToDTO(saved);
 	}
@@ -55,20 +59,6 @@ public class UserService {
 		}
 	}
 	
-//	public void deleteUser(Map<String, Object> details) {
-//		Long id = Long.valueOf(details.get("id").toString());
-//		String name = details.get("name").toString();
-//		String password = details.get("password").toString();
-//		
-//		User user = userRepository.findById(id)
-//				.orElseThrow(() -> new UserNotFoundException("User with id " + id + " not found."));
-//		if (name.equals(user.getName()) && password.equals(user.getPassword())) {
-//			userRepository.delete(user);
-//		} else {
-//			throw new InvalidRequestException("Unmatched credentials for id " + id);
-//		}
-//	}
-	
 	public void deleteUser(Long id) {
 		User user = userRepository.findById(id)
 				.orElseThrow(() -> new UserNotFoundException("User with id " + id + " not found."));
@@ -77,5 +67,11 @@ public class UserService {
 	
 	private UserDTO convertToDTO(User user) {
 		return UserDTO.toDTO(user);
+	}
+	
+	public User findUserByName(String name) {
+		User user = userRepository.findByName(name)
+				.orElseThrow(() -> new InvalidRequestException("Invalid Username or Password"));
+		return user;
 	}
 }

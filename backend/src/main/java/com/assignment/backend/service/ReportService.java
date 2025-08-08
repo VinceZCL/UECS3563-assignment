@@ -44,4 +44,10 @@ public class ReportService {
 		return reps;
 	}
 	
+	public void deleteReport(Long id) {
+		Report rep = reportRepository.findById(id)
+				.orElseThrow(() -> new ReportNotFoundException("Report with id " + id + " not found."));
+		reportRepository.delete(rep);
+	}
+	
 }
