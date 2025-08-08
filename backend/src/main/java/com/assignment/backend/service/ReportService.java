@@ -28,7 +28,7 @@ public class ReportService {
 	
 	public Report getReportById(Long id) {
 		Report rep = reportRepository.findById(id)
-				.orElseThrow(() -> new ReportNotFoundException("Report with report_id " + id + " not found."));
+				.orElseThrow(() -> new ReportNotFoundException("Report with id " + id + " not found."));
 		return rep;
 	}
 	
@@ -37,6 +37,11 @@ public class ReportService {
 		Report saved = reportRepository.save(rep);
 		entityManager.refresh(saved);
 		return saved;
+	}
+	
+	public List<Report> getReportsByUser(Long id) {
+		List<Report> reps = reportRepository.findByUserId(id);
+		return reps;
 	}
 	
 }

@@ -5,6 +5,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 
+import com.assignment.backend.exception.InvalidRequestException;
 import com.assignment.backend.exception.ReportNotFoundException;
 import com.assignment.backend.exception.UserNotFoundException;
 import com.assignment.backend.dto.ErrorResponse;
@@ -30,5 +31,15 @@ public class BackendExceptionHandler {
 			ex.getMessage()
 		);
 		return ResponseEntity.status(HttpStatus.NOT_FOUND).body(err);
+	}
+	
+	@ExceptionHandler(InvalidRequestException.class)
+	public ResponseEntity<ErrorResponse> handleInvalidRequest(InvalidRequestException ex) {
+		ErrorResponse err = new ErrorResponse(
+			HttpStatus.FORBIDDEN.value(),
+			"Invalid Request",
+			ex.getMessage()
+		);
+		return ResponseEntity.status(HttpStatus.FORBIDDEN).body(err);
 	}
 }

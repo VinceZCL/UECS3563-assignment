@@ -19,5 +19,5 @@ migrate: init-db
 	docker compose exec postgres-client mkdir -p /sql
 	docker cp $(SQL_FILE) postgres-client:/sql/init.sql
 	docker compose exec -e PGPASSWORD=$(DB_PASS) -T postgres-client psql -h postgresdb -U $(DB_USER) -d $(DB_NAME) -f /sql/init.sql
-	"$(MAKE)" kill
+	docker compose down
 
