@@ -1,18 +1,18 @@
 # UECS3563 Assignment
 
 ## Features
-* PostgreSQL Database
-* Java Spring Boot Backend
-* Typescript Angular Frontend
-* Docker & Docker Compose Integration
+* **PostgreSQL** Database
+* **Java Spring Boot** Backend
+* Typescript **Angular** Frontend
+* Containerised Setup via **Docker Compose**
 * Make utility with `Makefile`
 
 ## Requirements
-* **Docker** & **Docker Compose**, may be installed via **Docker Desktop**
+* **Docker** & **Docker Compose**, may be installed via [**Docker Desktop**](https://www.docker.com/products/docker-desktop/)
 
 ## QuickStart
 ### For Unix / WSL Users
-```
+```sh
 # Initialise Database
 make migrate
 
