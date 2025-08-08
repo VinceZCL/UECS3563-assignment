@@ -7,10 +7,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.assignment.backend.dto.UserDTO;
+import com.assignment.backend.exception.UserNotFoundException;
 import com.assignment.backend.model.User;
 import com.assignment.backend.repository.UserRepository;
-
-import jakarta.persistence.EntityNotFoundException;
 
 @Service
 public class UserService {
@@ -26,8 +25,13 @@ public class UserService {
 	
 	public UserDTO getUserById(Long id) {
 		User user = userRepository.findById(id)
-				.orElseThrow(() -> new EntityNotFoundException("Users not found"));
+				.orElseThrow(() -> new UserNotFoundException("User with user_id " + id + " not found."));
 		return convertToDTO(user);
+	}
+	
+	public UserDTO saveUser(User user) {
+		User saved = userRepository.save(user);
+		return convertToDTO(saved);
 	}
 	
 	private UserDTO convertToDTO(User user) {
