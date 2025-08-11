@@ -19,9 +19,7 @@ import com.assignment.backend.dto.JwtClaims;
 import com.assignment.backend.dto.UserDTO;
 import com.assignment.backend.dto.UserRequest;
 import com.assignment.backend.exception.UnauthorizedException;
-import com.assignment.backend.model.Report;
 import com.assignment.backend.security.JwtUtil;
-import com.assignment.backend.service.ReportService;
 import com.assignment.backend.service.UserService;
 
 import jakarta.servlet.http.HttpServletRequest;
@@ -36,8 +34,6 @@ public class UserController {
 	private JwtUtil jwt;
 	@Autowired
 	private UserService userService;
-	@Autowired
-	private ReportService reportService;
 	
 	@GetMapping("/users")
 	public ResponseEntity<List<UserDTO>> getUsers() {
@@ -55,12 +51,6 @@ public class UserController {
 	public ResponseEntity<UserDTO> addUser(@RequestBody UserRequest user) {
 		log.info("POST /api/users invoked");
 		return ResponseEntity.status(HttpStatus.CREATED).body(userService.saveUser(user));
-	}
-	
-	@GetMapping("/user/{id}/reports")
-	public ResponseEntity<List<Report>> getReportsOfUser(@PathVariable Long id) {
-		log.info("POST /api/user/{id}/reports invoked with id=" + id);
-		return ResponseEntity.ok(reportService.getReportsByUser(id));
 	}
 	
 	@PutMapping("/users")
