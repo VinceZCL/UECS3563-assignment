@@ -46,8 +46,8 @@ Windows Users has many options.
 ## Troubleshooting
 ### Docker Error
 > unable to get image 'assignment-backend': error during connect: Get "http://%2F%2F.%2Fpipe%2FdockerDesktopLinuxEngine/v1.51/images/assignment-backend/json": open //./pipe/dockerDesktopLinuxEngine: The system cannot find the file specified.
-> 
-Ensure that **Docker Engine** is up and running by running **Docker Desktop**
+
+Ensure that **Docker Engine** is up and running by starting **Docker Desktop**
 
 ### Unresponsive Backend
 Java Spring Boot takes a bit of time to compile and get running. To view the progress, run
