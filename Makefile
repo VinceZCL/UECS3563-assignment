@@ -1,9 +1,12 @@
-.PHONY: init-db dev kill migrate
+.PHONY: init-db dev kill migrate npm
 
 DB_USER = admin
 DB_NAME = assignment
 DB_PASS = root
 SQL_FILE = ./db/init.sql
+
+npm:
+	cd frontend && npm install
 
 init-db:
 	docker compose up -d postgresdb postgres-client
