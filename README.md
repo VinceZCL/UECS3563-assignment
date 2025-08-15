@@ -19,6 +19,9 @@
 ## QuickStart
 ### For Unix / WSL Users
 ```sh
+# Install npm Dependencies
+make npm
+
 # Initialise Database
 make migrate
 
