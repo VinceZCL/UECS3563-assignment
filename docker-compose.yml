@@ -23,6 +23,7 @@ services:
       - db-network
 
   backend:
+    container_name: backend
     build:
       context: ./backend
     depends_on:
@@ -35,14 +36,34 @@ services:
       - "8080:8080"
     networks:
       - db-network
+      - app-network
     volumes:
       - ./backend:/app
-      - ~/.m2:/root/.m2
+      - maven_cache:/root/.m2
     working_dir: /app
     command: mvn spring-boot:run -Dspring-boot.run.fork=false
   
+  frontend:
+    container_name: frontend
+    build:
+      context: ./frontend
+    depends_on:
+      - backend
+    ports:
+      - "4200:4200"
+    networks:
+      - app-network
+    volumes:
+      - ./frontend:/app
+      - node_modules_volume:/app/node_modules
+    working_dir: /app
+    command: ng serve --host 0.0.0.0 --poll=2000 --disable-host-check
+
 volumes:
   postgres_data:
+  node_modules_volume:
+  maven_cache:
 
 networks:
   db-network:
+  app-network:

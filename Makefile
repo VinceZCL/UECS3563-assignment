@@ -12,7 +12,7 @@ kill:
 	docker compose down
 
 dev:
-	docker compose up --build -d postgresdb backend
+	docker compose up --build -d postgresdb backend frontend
 
 migrate: init-db
 	@until docker compose exec -T postgres-client pg_isready -h postgresdb -U $(DB_USER); do sleep 1; done

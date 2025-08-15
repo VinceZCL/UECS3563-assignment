@@ -22,7 +22,7 @@
 # Initialise Database
 make migrate
 
-# Start the Server
+# Start the Development Server
 make dev
 
 # Kill the Server
@@ -50,7 +50,11 @@ Windows Users has many options.
 Ensure that **Docker Engine** is up and running by starting **Docker Desktop**
 
 ### Unresponsive Backend
-Java Spring Boot takes a bit of time to compile and get running. To view the progress, run
+**Java Spring Boot** takes a bit of time to compile and get running. To view the progress, run
 ```sh
 docker compose logs -f backend
 ```
+
+### Slow startup
+The **Angular image** might take a lot of time in the `npm install` stage.
+However, that will only be in the first boot, as the `node_modules` will be stored within a **Docker Volume**.
