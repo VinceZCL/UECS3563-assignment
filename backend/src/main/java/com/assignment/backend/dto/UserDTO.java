@@ -14,7 +14,7 @@ import lombok.ToString;
 @ToString
 
 public class UserDTO {
-	private Long user_id;
+	private Long id;
 	private String username;
 	
 	public static UserDTO toDTO(User user) {

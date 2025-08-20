@@ -227,6 +227,9 @@
       </svg>
       <h1>Hello, {{ title }}</h1>
       <p>Congratulations! Your app is running. 🎉</p>
+      @for (user of users; track user) {
+        <li>ID: {{user.id}}, Name: {{user.username}}</li>
+      }
     </div>
     <div class="divider" role="separator" aria-label="Divider"></div>
     <div class="right-side">
