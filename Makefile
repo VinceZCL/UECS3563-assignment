@@ -1,4 +1,4 @@
-.PHONY: init-db dev kill migrate npm
+.PHONY: init-db dev kill migrate npm rebuild
 
 DB_USER = admin
 DB_NAME = assignment
