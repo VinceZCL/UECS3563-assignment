@@ -1,0 +1,43 @@
+/* Base styling for the navbar container */
+ul {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    background-color: #333;
+    font-family: Arial, sans-serif;
+}
+
+li {
+    display: flex;
+}
+
+/* Nav link styling */
+a {
+    display: block;
+    color: white;
+    text-align: center;
+    padding: 14px 16px;
+    text-decoration: none;
+}
+
+/* Hover effect */
+a:hover {
+    background-color: #575757;
+}
+
+/* Active link styling */
+.activelink {
+    background-color: darkcyan;
+    font-size: 120%;
+    font-weight: bold;
+}
+
+h1, h2 {
+    text-align: center;
+}
+
+.logout {
+    margin-left: auto;
+    margin-right: 0;
+}

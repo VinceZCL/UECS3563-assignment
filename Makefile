@@ -1,4 +1,4 @@
-.PHONY: init-db dev kill migrate npm
+.PHONY: init-db dev kill migrate npm rebuild
 
 DB_USER = admin
 DB_NAME = assignment
@@ -13,6 +13,9 @@ init-db:
 
 kill:
 	docker compose down
+
+rebuild:
+	docker compose build --no-cache backend frontend
 
 dev:
 	docker compose up --build -d postgresdb backend frontend
