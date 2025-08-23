@@ -14,6 +14,9 @@ init-db:
 kill:
 	docker compose down
 
+rebuild:
+	docker compose build --no-cache backend frontend
+
 dev:
 	docker compose up --build -d postgresdb backend frontend
 

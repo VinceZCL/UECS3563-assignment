@@ -14,7 +14,7 @@ import com.assignment.backend.security.JwtUtil;
 import com.assignment.backend.service.UserService;
 
 @RestController
-@RequestMapping("/auth")
+@RequestMapping("/api")
 public class AuthController {
 
 	@Autowired
@@ -22,7 +22,7 @@ public class AuthController {
 	@Autowired
 	private UserService userService;
 	
-	@PostMapping("/login")
+	@PostMapping("/auth")
 	public ResponseEntity<String> login(@RequestBody UserRequest userReq) {
 		User target = userService.findUserByName(userReq.getName());
 		if (userReq.getName().equals(target.getName()) && userReq.getPassword().equals(target.getPassword())) {

@@ -1,37 +1,28 @@
 import { Component, OnInit } from '@angular/core';
-import { RouterOutlet } from '@angular/router';
+import { RouterLink, RouterLinkActive, RouterOutlet } from '@angular/router';
 import { inject } from '@angular/core';
 
 import { User } from './models/user';
-import { UserService } from './services/user.service';
-import { HttpClientModule } from '@angular/common/http';
+import { AuthService } from './services/auth.service';
 
 @Component({
   selector: 'app-root',
-  imports: [RouterOutlet, HttpClientModule],
+  imports: [RouterOutlet, RouterLink, RouterLinkActive],
   templateUrl: './app.component.html',
   styleUrl: './app.component.css'
 })
 export class AppComponent implements OnInit {
   title = 'frontend';
 
-  users: User[] = [];
+  log : boolean = false;
 
-  private userService = inject(UserService);
+  private auth = inject(AuthService);
 
   ngOnInit() : void {
-    this.loadUsers();
+    this.auth.isLogged.subscribe(status => this.log = status);
   }
 
-  loadUsers() : void {
-    this.userService.getUsers().subscribe({
-      next: (event: User[]) => {
-        console.log(event);
-        this.users = event;
-      },
-      error: (error: Error) => {
-        console.log(error);
-      }
-    })
+  logout(): void {
+    this.auth.logout();
   }
 }
