@@ -1,1 +1,11 @@
 <p>reports works!</p>
+@for (report of reports; track report) {
+    <ul>
+        <li>{{report.id}}</li>
+        <li>{{report.userId}}</li>
+        <li>{{report.yesterday}}</li>
+        <li>{{report.today}}</li>
+        <li>{{report.blockers}}</li>
+        <li>{{report.submitted_at}}</li>
+    </ul>
+}
