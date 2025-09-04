@@ -19,9 +19,6 @@
 ## QuickStart
 ### For Unix / WSL Users
 ```sh
-# Install npm Dependencies
-make npm
-
 # Initialise Database
 make migrate
 
@@ -33,7 +30,14 @@ make kill
 ```
 `make migrate` only needs to be ran once.
 
-### For Windows Users
+### For Development Purpose
+`make npm` to install npm dependencies for local development.
+You do not this to run this to start the server.
+
+### Rebuild Docker Images
+`make image` to rebuild docker images without cache.
+
+## For Windows Users
 Windows Users has many options.
 1. Use [**Make for Windows**](https://gnuwin32.sourceforge.net/packages/make.htm)
 
