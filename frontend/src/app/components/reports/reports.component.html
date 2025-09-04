@@ -1,11 +1,39 @@
-<p>reports works!</p>
-@for (report of reports; track report) {
-    <ul>
-        <li>{{report.id}}</li>
-        <li>{{report.userId}}</li>
-        <li>{{report.yesterday}}</li>
-        <li>{{report.today}}</li>
-        <li>{{report.blockers}}</li>
-        <li>{{report.submitted_at}}</li>
-    </ul>
-}
+<!-- add date selector for date filtering -->
+
+<label for="select">Select Report Type:</label>
+<select id="select" [(ngModel)]="reportFilter" (change)="filterChange()">
+    <option value="my">My Reports</option>
+    <option value="all">All Reports</option>
+</select>
+
+<div class="reports">
+    @for (report of reports; track report) {
+
+        <div class="single">
+            <h3>{{report.submitted_at}}</h3>
+            @if (report.username == "") {
+                <h3>Anonymous</h3>
+            } @else {
+                <h3>{{report.username}}</h3>
+            }
+            <!-- <h3>{{this.getReportUsername(report.userId) | async}}</h3> -->
+            <div class="internal">
+                <h4>Yesterday</h4>
+                <div class="items">
+                    <p>{{report.yesterday}}</p>
+                </div>
+                <h4>Today</h4>
+                <div class="items">
+                    <p>{{report.today}}</p>
+                </div>
+                @if (report.blockers != "") {
+                    <h4>Blockers</h4>
+                    <div class="items">
+                        <p>{{report.blockers}}</p>
+                    </div>
+                }
+            </div>
+        </div>
+
+    }
+</div>

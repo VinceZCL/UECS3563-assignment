@@ -1,0 +1,75 @@
+label {
+  display: block;
+  width: 300px;
+  margin: 40px auto 10px;
+  font-family: Arial, sans-serif;
+  font-size: 14px;
+  color: #333;
+}
+
+select {
+  width: 300px;
+  margin: 0 auto 30px;
+  display: block;
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  font-size: 14px;
+  font-family: Arial, sans-serif;
+  box-sizing: border-box;
+  transition: border 0.2s;
+}
+
+select:focus {
+  border-color: #007bff;
+  outline: none;
+}
+
+.reports {
+  width: 90%;
+  max-width: 800px;
+  margin: 0 auto;
+  font-family: Arial, sans-serif;
+}
+
+.single {
+  background-color: #ffffff;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  padding: 20px;
+  margin-bottom: 25px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+  transition: box-shadow 0.3s;
+}
+
+.single:hover {
+  box-shadow: 0 6px 16px rgba(0, 0, 0, 0.08);
+}
+
+.single h3 {
+  font-size: 16px;
+  color: #007bff;
+  margin: 0 0 10px;
+}
+
+.internal h4 {
+  font-size: 15px;
+  color: #333;
+  margin-top: 20px;
+  margin-bottom: 5px;
+}
+
+.items {
+  padding: 10px;
+  background-color: #f9f9f9;
+  border-left: 3px solid #007bff;
+  margin-bottom: 10px;
+  border-radius: 4px;
+}
+
+.items p {
+  margin: 0;
+  font-size: 14px;
+  color: #444;
+  line-height: 1.4;
+}

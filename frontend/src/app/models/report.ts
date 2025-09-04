@@ -6,3 +6,7 @@ export interface DailyReport {
     blockers: string;
     submitted_at: Date;
 }
+
+export interface EnrichedReport extends DailyReport {
+    username: string;
+}

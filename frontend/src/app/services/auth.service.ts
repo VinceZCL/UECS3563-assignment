@@ -1,7 +1,8 @@
 import { HttpClient } from '@angular/common/http';
 import { inject, Injectable } from '@angular/core';
 import { BehaviorSubject, Observable } from 'rxjs';
-import { tap } from 'rxjs/operators';
+import { map, tap } from 'rxjs/operators';
+import { User } from '../models/user';
 
 @Injectable({
   providedIn: 'root'
@@ -32,5 +33,17 @@ export class AuthService {
 
   logout() : void {
     localStorage.removeItem("token");
+  }
+
+  getUserFromAuth() : Observable<User> {
+    return this.http.get<User>(`http://localhost:8080/api/users/jwt`);
+  }
+
+  private user! : User;
+
+  getUserId() : Observable<number> {
+    return this.getUserFromAuth().pipe(
+      map((user:User) => user.id)
+    );
   }
 }
