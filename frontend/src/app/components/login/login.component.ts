@@ -2,6 +2,7 @@ import { Component, inject } from '@angular/core';
 import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { AuthService } from '../../services/auth.service';
 import { Router, RouterLink } from '@angular/router';
+import { HttpErrorResponse } from '@angular/common/http';
 
 @Component({
   selector: 'app-login',
@@ -33,7 +34,10 @@ export class LoginComponent {
     this.error = "";
     this.auth.login(this.form.value).subscribe({
       next: () => this.router.navigate(["/home"]),
-      error: () => this.error = "Login failed"
+      error: (err: HttpErrorResponse) => {
+        console.error(err);
+        this.error = JSON.parse(err.error).message;
+      }
     })
   }
 }
