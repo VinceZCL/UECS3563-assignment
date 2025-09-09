@@ -20,4 +20,8 @@ export class UserService {
       map((user:User) => user.username)
     )
   }
+
+  createUser(cred: {name:string, password:string}) : Observable<User> {
+    return this.http.post<User>(`${this.url}/users`, cred);
+  }
 }

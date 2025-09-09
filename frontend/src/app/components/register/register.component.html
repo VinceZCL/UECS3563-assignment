@@ -1,0 +1,13 @@
+<form [formGroup]="form" (ngSubmit)="onSubmit()">
+    <input formControlName="name" placeholder="Username" />
+    <input type="password" formControlName="password" placeholder="Password" />
+    <input type="password" formControlName="confirm_password" placeholder="Confirm Password" />
+    <button type="submit">Register</button>
+    @if (error) {
+        <p>{{error}}</p>
+    }
+    <p style="margin-top: 20px; text-align: center;">
+        Already have an account?
+        <a href="#" routerLink="/login" style="color: #007bff; text-decoration: none;">Login here</a>
+    </p>
+</form>

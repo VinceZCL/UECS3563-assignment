@@ -1,5 +1,3 @@
-<!-- add date selector for date filtering -->
-
 <label for="select">Select Report Type:</label>
 <select id="select" [(ngModel)]="reportFilter" (change)="filterChange()">
     <option value="my">My Reports</option>
@@ -16,7 +14,6 @@
             } @else {
                 <h3>{{report.username}}</h3>
             }
-            <!-- <h3>{{this.getReportUsername(report.userId) | async}}</h3> -->
             <div class="internal">
                 <h4>Yesterday</h4>
                 <div class="items">
