@@ -8,7 +8,7 @@
     @for (report of reports; track report) {
 
         <div class="single">
-            <h3>{{report.submitted_at}}</h3>
+            <h3>{{report.submitted_at | date: 'dd MMMM yyyy'}}</h3>
             @if (report.username == "") {
                 <h3>Anonymous</h3>
             } @else {

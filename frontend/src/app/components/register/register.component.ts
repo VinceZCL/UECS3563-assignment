@@ -3,6 +3,7 @@ import { AbstractControl, FormBuilder, FormGroup, ReactiveFormsModule, Validatio
 import { UserService } from '../../services/user.service';
 import { Router, RouterLink } from '@angular/router';
 import { User } from '../../models/user';
+import { HttpErrorResponse } from '@angular/common/http';
 
 @Component({
   selector: 'app-register',
@@ -56,8 +57,13 @@ export class RegisterComponent {
       next: (val: User) => {
         this.router.navigate(["/login"]);
       },
-      error: (err: Error) => {
-        this.error = "Register failed";
+      error: (err: HttpErrorResponse) => {
+        console.error(err);
+        try {
+          this.error = JSON.parse(err.error).message;
+        } catch {
+          this.error = "Registration failure";
+        }
       }
     })
   }

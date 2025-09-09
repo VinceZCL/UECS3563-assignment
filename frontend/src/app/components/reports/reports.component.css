@@ -27,17 +27,22 @@ select:focus {
 
 .reports {
   width: 90%;
-  max-width: 800px;
+  max-width: 1200px;
   margin: 0 auto;
   font-family: Arial, sans-serif;
+
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+  gap: 25px;
 }
+
 
 .single {
   background-color: #ffffff;
   border: 1px solid #ddd;
   border-radius: 8px;
   padding: 20px;
-  margin-bottom: 25px;
+  margin-bottom: 10px;
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
   transition: box-shadow 0.3s;
 }

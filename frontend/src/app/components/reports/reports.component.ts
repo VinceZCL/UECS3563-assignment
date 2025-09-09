@@ -4,10 +4,12 @@ import { DailyReport, EnrichedReport } from '../../models/report';
 import { FormsModule } from '@angular/forms';
 import { UserService } from '../../services/user.service';
 import { forkJoin, map, Observable, switchMap } from 'rxjs';
+import { CommonModule } from '@angular/common';
+import { HttpErrorResponse } from '@angular/common/http';
 
 @Component({
   selector: 'app-reports',
-  imports: [FormsModule],
+  imports: [FormsModule, CommonModule],
   templateUrl: './reports.component.html',
   styleUrl: './reports.component.css'
 })
@@ -52,7 +54,7 @@ export class ReportsComponent implements OnInit {
       next: (enReports : EnrichedReport[]) => {
         this.reports = enReports;
       },
-      error: (err:Error) => {
+      error: (err:HttpErrorResponse) => {
         console.log(err);
       }
     })
@@ -75,7 +77,7 @@ export class ReportsComponent implements OnInit {
       next: (enReports : EnrichedReport[]) => {
         this.reports = enReports;
       },
-      error: (err:Error) => {
+      error: (err:HttpErrorResponse) => {
         console.log(err);
       },
     });
