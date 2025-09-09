@@ -85,4 +85,8 @@ export class ReportsComponent implements OnInit {
     return this.userService.getUsername(id);
   }
 
+  // component for individual / single report
+  // accessed via href = ?id= with report.id
+  // if authService get userId match -> allow delete
+
 }
