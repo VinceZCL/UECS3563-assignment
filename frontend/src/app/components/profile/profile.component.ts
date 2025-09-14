@@ -46,7 +46,7 @@ export class ProfileComponent implements OnInit {
   toggleEdit() : void {
     this.mode = !this.mode;
     if (this.mode) {
-      this.form.patchValue({old_name: this.user.name});
+      this.form.patchValue({old_name: this.user.username});
     }
   }
 
@@ -61,7 +61,8 @@ export class ProfileComponent implements OnInit {
         next: (val: any) => {
           console.log(val);
           this.user.id = val.id;
-          this.user.name = val.username;
+          this.user.username = val.username;
+          this.form.reset();
           this.mode = !this.mode;
         },
         error: (err: HttpErrorResponse) => {

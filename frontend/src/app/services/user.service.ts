@@ -1,7 +1,7 @@
 import { inject, Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { User } from '../models/user';
-import { map, Observable } from 'rxjs';
+import { map, Observable, tap } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
@@ -17,7 +17,7 @@ export class UserService {
 
   getUsername(id:number) : Observable<string> {
     return this.http.get<User>(`${this.url}/user/${id}`).pipe(
-      map((user:User) => user.name)
+      map((user:User) => user.username)
     )
   }
 

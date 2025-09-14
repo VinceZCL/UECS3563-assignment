@@ -3,7 +3,7 @@ import { ReportService } from '../../services/report.service';
 import { DailyReport, EnrichedReport } from '../../models/report';
 import { FormsModule } from '@angular/forms';
 import { UserService } from '../../services/user.service';
-import { forkJoin, map, Observable, switchMap } from 'rxjs';
+import { firstValueFrom, forkJoin, map, Observable, switchMap } from 'rxjs';
 import { CommonModule } from '@angular/common';
 import { HttpErrorResponse } from '@angular/common/http';
 
@@ -17,11 +17,18 @@ export class ReportsComponent implements OnInit {
 
   private reportService = inject(ReportService);
   private userService = inject(UserService);
-  reports! : EnrichedReport[] | undefined;
+  reports: DailyReport[] = [];
+  enReports: EnrichedReport[] = [];
 
   reportFilter: string = "my";
 
   filterChange() {
+    if (this.enReports.length >= 1) {
+      this.enReports.length = 0;
+    }
+    if (this.reports.length >= 1) {
+      this.reports.length = 0;
+    }
     this.changeReports();
   }
 
@@ -37,58 +44,54 @@ export class ReportsComponent implements OnInit {
     }
   }
 
-  getAllReports() : void {
+  getAllReports(): void {
     this.reportService.getReports().pipe(
       switchMap((reports: DailyReport[]) => {
-        this.reports = reports.map(report => ({
-          ...report,
-          username: ""
-        }));
-        return forkJoin(
-          reports.map(report => this.userService.getUsername(report.userId).pipe(
-            map(name => ({...report, username: name}))
-          ))
-        );
-      })
-    ).subscribe({
-      next: (enReports : EnrichedReport[]) => {
-        this.reports = enReports;
-      },
-      error: (err:HttpErrorResponse) => {
-        console.log(err);
-      }
-    })
-  }
+        this.reports = reports;
 
-  getOwnReports() : void {
-    this.reportService.getCurUserReports().pipe(
-      switchMap((reports: DailyReport[]) => {
-        this.reports = reports.map(report => ({
-          ...report,
-          username: ""
-        }));
-        return forkJoin(
-          reports.map(report => this.userService.getUsername(report.userId).pipe(
-            map(name => ({...report, username: name}))
-          ))
+        const enrichedReports$ = reports.map(report =>
+          this.userService.getUsername(report.userId).pipe(
+            map(username => ({
+              ...report,
+              username,
+            }))
+          )
         );
+        return forkJoin(enrichedReports$);
       })
     ).subscribe({
-      next: (enReports : EnrichedReport[]) => {
-        this.reports = enReports;
+      next: (enriched: EnrichedReport[]) => {
+        this.enReports = enriched;
       },
-      error: (err:HttpErrorResponse) => {
-        console.log(err);
-      },
+      error: (err: HttpErrorResponse) => {
+        console.error(err);
+      }
     });
   }
 
-  getReportUsername(id:number) : Observable<string> {
-    return this.userService.getUsername(id);
-  }
+  getOwnReports(): void {
+    this.reportService.getCurUserReports().pipe(
+      switchMap((reports: DailyReport[]) => {
+        this.reports = reports;
 
-  // component for individual / single report
-  // accessed via href = ?id= with report.id
-  // if authService get userId match -> allow delete
+        const enrichedReports$ = reports.map(report =>
+          this.userService.getUsername(report.userId).pipe(
+            map(username => ({
+              ...report,
+              username,
+            }))
+          )
+        );
+        return forkJoin(enrichedReports$);
+      })
+    ).subscribe({
+      next: (enriched: EnrichedReport[]) => {
+        this.enReports = enriched;
+      },
+      error: (err: HttpErrorResponse) => {
+        console.error(err);
+      }
+    });
+  }
 
 }

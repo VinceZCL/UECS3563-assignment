@@ -5,13 +5,10 @@
 </select>
 
 <div class="reports">
-    @for (report of reports; track report) {
-
+    @for (report of enReports; track report) {
         <div class="single">
             <h3>{{report.submitted_at | date: 'dd MMMM yyyy'}}</h3>
-            @if (report.username == "") {
-                <h3>Anonymous</h3>
-            } @else {
+            @if (reportFilter != "my") {
                 <h3>{{report.username}}</h3>
             }
             <div class="internal">
