@@ -1,1 +1,14 @@
-<p>dashboard works!</p>
+<h2>Daily Check-Ins</h2>
+
+<form [formGroup]="form" (ngSubmit)="onSubmit()">
+    <input formControlName="yesterday" placeholder="What did you do yesterday?"/><br>
+    <input formControlName="today" placeholder="What do you plan to do today?"/><br>
+    <input formControlName="blockers" placeholder="What blockers are you facing?"/><br>
+    <button type="submit">Submit Check-In</button>
+    @if (error) {
+        <p class="err">{{error}}</p>
+    }
+    @if (success) {
+        <p class="suc">{{success}} <a href="#" routerLink="/reports" style="color: #007bff; text-decoration: none;">View here!</a></p>
+    }
+</form>

@@ -26,4 +26,8 @@ export class ReportService {
       switchMap(userId => this.getUserReports(userId))
     )
   }
+
+  createReport(rep: {userId:number, yesterday:string, today:string, blockers:string}) : Observable<Report> {
+    return this.http.post<Report>(`${this.url}/reports`, rep);
+  }
 }

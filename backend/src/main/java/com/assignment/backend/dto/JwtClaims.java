@@ -12,6 +12,6 @@ import lombok.Setter;
 public class JwtClaims {
 
 	private Long id;
-	private String name;
+	private String username;
 	
 }

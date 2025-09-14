@@ -1,0 +1,67 @@
+h2 {
+  font-family: Arial, sans-serif;
+  text-align: center;
+  color: #007bff;
+  margin-top: 40px;
+  margin-bottom: 20px;
+  font-size: 24px;
+}
+
+form {
+  width: 90%;
+  max-width: 500px;
+  margin: 0 auto;
+  font-family: Arial, sans-serif;
+  background-color: #fff;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  padding: 30px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+}
+
+input {
+  width: 100%;
+  padding: 12px;
+  margin-bottom: 15px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  font-size: 14px;
+  box-sizing: border-box;
+  transition: border 0.2s;
+}
+
+input:focus {
+  border-color: #007bff;
+  outline: none;
+}
+
+button {
+  width: 100%;
+  padding: 12px;
+  background-color: #007bff;
+  border: none;
+  border-radius: 4px;
+  font-size: 14px;
+  color: white;
+  cursor: pointer;
+  transition: background-color 0.2s;
+}
+
+button:hover {
+  background-color: #0056b3;
+}
+
+.err {
+  color: red;
+  font-size: 13px;
+  margin-top: 10px;
+  text-align: center;
+}
+
+.suc {
+  color: green;
+  font-size: 13px;
+  margin-top: 10px;
+  text-align: center;
+
+}
