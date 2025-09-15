@@ -30,4 +30,8 @@ export class ReportService {
   createReport(rep: {userId:number, yesterday:string, today:string, blockers:string}) : Observable<Report> {
     return this.http.post<Report>(`${this.url}/reports`, rep);
   }
+
+  getReportById(id:number) : Observable<DailyReport> {
+    return this.http.get<DailyReport>(`${this.url}/report/${id}`);
+  }
 }

@@ -3,13 +3,14 @@ import { ReportService } from '../../services/report.service';
 import { DailyReport, EnrichedReport } from '../../models/report';
 import { FormsModule } from '@angular/forms';
 import { UserService } from '../../services/user.service';
-import { firstValueFrom, forkJoin, map, Observable, switchMap } from 'rxjs';
+import { filter, forkJoin, map, switchMap } from 'rxjs';
 import { CommonModule } from '@angular/common';
 import { HttpErrorResponse } from '@angular/common/http';
+import { ActivatedRoute, NavigationEnd, Router, RouterLink, RouterOutlet } from '@angular/router';
 
 @Component({
   selector: 'app-reports',
-  imports: [FormsModule, CommonModule],
+  imports: [FormsModule, CommonModule, RouterLink, RouterOutlet],
   templateUrl: './reports.component.html',
   styleUrl: './reports.component.css'
 })
@@ -17,6 +18,11 @@ export class ReportsComponent implements OnInit {
 
   private reportService = inject(ReportService);
   private userService = inject(UserService);
+  private route = inject(ActivatedRoute);
+  private router = inject(Router);
+
+  private childRouteActive : boolean = false;
+
   reports: DailyReport[] = [];
   enReports: EnrichedReport[] = [];
 
@@ -34,6 +40,15 @@ export class ReportsComponent implements OnInit {
 
   ngOnInit(): void {
     this.filterChange();
+
+    this.router.events.pipe(
+      filter(event => event instanceof NavigationEnd)).subscribe(() => {
+        this.childRouteActive = this.route.firstChild != null;
+      });
+  }
+
+  isDetailView() : boolean {
+    return this.childRouteActive;
   }
 
   changeReports() {

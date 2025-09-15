@@ -1,13 +1,14 @@
 import { Component, inject, OnInit } from '@angular/core';
 import { AuthService } from '../../services/auth.service';
 import { User } from '../../models/user';
-import { FormBuilder, FormGroup, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms';
+import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { HttpErrorResponse } from '@angular/common/http';
 import { UserService } from '../../services/user.service';
+import { ProfileEditComponent } from "./profile-edit/profile-edit.component";
 
 @Component({
   selector: 'app-profile',
-  imports: [ReactiveFormsModule],
+  imports: [ReactiveFormsModule, ProfileEditComponent],
   templateUrl: './profile.component.html',
   styleUrl: './profile.component.css'
 })
@@ -50,28 +51,9 @@ export class ProfileComponent implements OnInit {
     }
   }
 
-  submitEdit() : void {
-    if (this.form.invalid) {
-      this.error = "Missing fields";
-      return;
-    } else {
-      this.error = "";
-      let userId = this.user.id;
-      this.userService.editUser({id: userId, ...this.form.value}).subscribe({
-        next: (val: any) => {
-          console.log(val);
-          this.user.id = val.id;
-          this.user.username = val.username;
-          this.form.reset();
-          this.mode = !this.mode;
-        },
-        error: (err: HttpErrorResponse) => {
-          console.error(err);
-          this.error = err.error.message;
-          return;
-        }
-      })
-    }
+  onUserUpdate(updated : User) : void {
+    this.user=updated;
+    this.mode = false;
   }
 
 }

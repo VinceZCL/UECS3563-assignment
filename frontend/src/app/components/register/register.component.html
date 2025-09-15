@@ -1,7 +1,7 @@
 <form [formGroup]="form" (ngSubmit)="onSubmit()">
-    <input formControlName="name" placeholder="Username" />
-    <input type="password" formControlName="password" placeholder="Password" />
-    <input type="password" formControlName="confirm_password" placeholder="Confirm Password" />
+    <input formControlName="name" placeholder="Username" [ngClass]="{'invalid' : invalidInp('name')}" />
+    <input type="password" formControlName="password" placeholder="Password" [ngClass]="{'invalid' : invalidInp('password')}" />
+    <input type="password" formControlName="confirm_password" placeholder="Confirm Password" [ngClass]="{'invalid' : invalidInp('confirm_password')}" />
     <button type="submit">Register</button>
     @if (error) {
         <p>{{error}}</p>

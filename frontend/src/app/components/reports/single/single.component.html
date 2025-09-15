@@ -1,0 +1,43 @@
+@if (report) {
+  <div class="single-container">
+    <button class="back-button" (click)="back()">← Return to Reports</button>
+
+    <div class="report-detail">
+      <h2>Report ID: <span>{{ report.id }}</span></h2>
+      <h2>Date: <span>{{ report.submitted_at | date: 'dd MMMM yy' }}</span></h2>
+      <h2>User: <span>{{ username }}</span></h2>
+
+      <div class="section">
+        <h3>Yesterday</h3>
+        <div class="items">
+          <p>{{ report.yesterday }}</p>
+        </div>
+      </div>
+
+      <div class="section">
+        <h3>Today</h3>
+        <div class="items">
+          <p>{{ report.today }}</p>
+        </div>
+      </div>
+
+      <div class="section">
+        @if (report.blockers == "") {
+          <h3>Blockers</h3>
+          <div class="items no-blockers">
+            <p>No Blockers 😊</p>
+          </div>
+        } @else {
+          <h3>Blockers</h3>
+          <div class="items blockers">
+            <p>{{ report.blockers }}</p>
+          </div>
+        }
+      </div>
+    </div>
+  </div>
+} @else {
+  <div class="loading">
+    <h1>Loading Report...</h1>
+  </div>
+}

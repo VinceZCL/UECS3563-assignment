@@ -33,6 +33,9 @@ make kill
 ### For Development Purpose
 `make npm` to install npm dependencies for local development.
 You do not this to run this to start the server.
+`make dev` support hot-reloading.
+**backend** via **Spring DevTools**
+**frontend** via **Angular**
 
 ### Rebuild Docker Images
 `make image` to rebuild docker images without cache.

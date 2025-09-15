@@ -1,33 +1,39 @@
-<label for="select">Select Report Type:</label>
-<select id="select" [(ngModel)]="reportFilter" (change)="filterChange()">
-    <option value="my">My Reports</option>
-    <option value="all">All Reports</option>
-</select>
-
-<div class="reports">
-    @for (report of enReports; track report) {
-        <div class="single">
-            <h3>{{report.submitted_at | date: 'dd MMMM yyyy'}}</h3>
-            @if (reportFilter != "my") {
-                <h3>{{report.username}}</h3>
-            }
-            <div class="internal">
-                <h4>Yesterday</h4>
-                <div class="items">
-                    <p>{{report.yesterday}}</p>
-                </div>
-                <h4>Today</h4>
-                <div class="items">
-                    <p>{{report.today}}</p>
-                </div>
-                @if (report.blockers != "") {
-                    <h4>Blockers</h4>
-                    <div class="items">
-                        <p>{{report.blockers}}</p>
+@if (!isDetailView()) {
+    <label for="select">Select Report Type:</label>
+    <select id="select" [(ngModel)]="reportFilter" (change)="filterChange()">
+        <option value="my">My Reports</option>
+        <option value="all">All Reports</option>
+    </select>
+    
+    <div class="reports">
+        @for (report of enReports; track report; let i = $index) {
+            <a href="#" [routerLink]="['single']" [queryParams]="{id:report.id}" style="text-decoration: none;">
+                <div class="single">
+                    <h3 style="text-align: center;">{{i+1}}</h3>
+                    <h3>{{report.submitted_at | date: 'dd MMMM yyyy'}}</h3>
+                    @if (reportFilter != "my") {
+                        <h3>{{report.username}}</h3>
+                    }
+                    <div class="internal">
+                        <h4>Yesterday</h4>
+                        <div class="items">
+                            <p>{{report.yesterday}}</p>
+                        </div>
+                        <h4>Today</h4>
+                        <div class="items">
+                            <p>{{report.today}}</p>
+                        </div>
+                        @if (report.blockers != "") {
+                            <h4>Blockers</h4>
+                            <div class="items">
+                                <p>{{report.blockers}}</p>
+                            </div>
+                        }
                     </div>
-                }
-            </div>
-        </div>
-
-    }
-</div>
+                </div>
+            </a>
+        }
+    </div>
+} @else {
+    <router-outlet></router-outlet>
+}

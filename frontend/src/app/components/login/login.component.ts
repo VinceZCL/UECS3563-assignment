@@ -3,10 +3,11 @@ import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angula
 import { AuthService } from '../../services/auth.service';
 import { Router, RouterLink } from '@angular/router';
 import { HttpErrorResponse } from '@angular/common/http';
+import { NgClass } from '@angular/common';
 
 @Component({
   selector: 'app-login',
-  imports: [ReactiveFormsModule, RouterLink],
+  imports: [ReactiveFormsModule, RouterLink, NgClass],
   templateUrl: './login.component.html',
   styleUrl: './login.component.css'
 })
@@ -17,6 +18,7 @@ export class LoginComponent {
 
   form: FormGroup;
   error : string | null = null;
+  loginFail : boolean = false;
 
   constructor() {
     this.form = this.fb.group({
@@ -26,8 +28,10 @@ export class LoginComponent {
   }
 
   onSubmit() {
+    this.loginFail = false;
     if (this.form.invalid) {
       this.error = "Missing fields";
+      this.markAllFields();
       return;
     };
     
@@ -37,7 +41,21 @@ export class LoginComponent {
       error: (err: HttpErrorResponse) => {
         console.error(err);
         this.error = JSON.parse(err.error).message;
+        this.markAllFields();
+        this.loginFail = true;
       }
+    })
+  }
+
+  invalidInp(controlName: string) : boolean {
+    let control = this.form.get(controlName);
+    return !!(control && control.invalid && (control.dirty || control.touched) || this.loginFail);
+  }
+
+  private markAllFields() : void {
+    Object.values(this.form.controls).forEach(control => {
+      control.markAsTouched();
+      control.markAsDirty();
     })
   }
 }
