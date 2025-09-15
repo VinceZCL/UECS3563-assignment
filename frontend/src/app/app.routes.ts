@@ -6,12 +6,15 @@ import { authGuard } from './guards/auth.guard';
 import { ReportsComponent } from './components/reports/reports.component';
 import { RegisterComponent } from './components/register/register.component';
 import { ProfileComponent } from './components/profile/profile.component';
+import { SingleComponent } from './components/reports/single/single.component';
 
 export const routes: Routes = [
     {path: "login", component: LoginComponent},
     {path: "register", component: RegisterComponent},
     {path: "home", component: DashboardComponent, canActivate: [authGuard]},
-    {path: "reports", component: ReportsComponent, canActivate: [authGuard]},
+    {path: "reports", component: ReportsComponent, canActivate: [authGuard], children: [{
+        path: "single", component: SingleComponent
+    }]},
     {path: "profile", component: ProfileComponent, canActivate: [authGuard]},
     {path: "", redirectTo:"home", pathMatch: "full"},
     {path: "**", component: PageNotFoundComponent}

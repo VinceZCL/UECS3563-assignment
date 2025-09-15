@@ -4,11 +4,11 @@ import { ReportService } from '../../services/report.service';
 import { AuthService } from '../../services/auth.service';
 import { HttpErrorResponse } from '@angular/common/http';
 import { RouterLink } from '@angular/router';
-import { switchMap } from 'rxjs';
+import { NgClass } from '@angular/common';
 
 @Component({
   selector: 'app-dashboard',
-  imports: [ReactiveFormsModule, RouterLink],
+  imports: [ReactiveFormsModule, RouterLink, NgClass],
   templateUrl: './dashboard.component.html',
   styleUrl: './dashboard.component.css'
 })
@@ -34,6 +34,7 @@ export class DashboardComponent {
   onSubmit() {
     if (this.form.invalid) {
       this.error = "Missing fields";
+      this.markYtdTd();
       return;
     }
     this.error = "";
@@ -51,6 +52,16 @@ export class DashboardComponent {
         })
       }
     })
+  }
+
+  invalidInp(controlName: string) : boolean {
+    let control = this.form.get(controlName);
+    return !!(control && control.invalid && (control.dirty || control.touched));
+  }
+
+  markYtdTd() : void {
+    this.form.get("yesterday")?.markAsTouched();
+    this.form.get("today")?.markAsDirty();
   }
 
 }

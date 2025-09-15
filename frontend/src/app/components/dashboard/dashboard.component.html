@@ -1,8 +1,8 @@
 <h2>Daily Check-Ins</h2>
 
 <form [formGroup]="form" (ngSubmit)="onSubmit()">
-    <input formControlName="yesterday" placeholder="What did you do yesterday?"/><br>
-    <input formControlName="today" placeholder="What do you plan to do today?"/><br>
+    <input formControlName="yesterday" placeholder="What did you do yesterday?" [ngClass]="{'invalid':invalidInp('yesterday')}" /><br>
+    <input formControlName="today" placeholder="What do you plan to do today?" [ngClass]="{'invalid':invalidInp('today')}" /><br>
     <input formControlName="blockers" placeholder="What blockers are you facing?"/><br>
     <button type="submit">Submit Check-In</button>
     @if (error) {

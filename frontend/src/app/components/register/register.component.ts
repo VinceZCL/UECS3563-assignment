@@ -4,10 +4,11 @@ import { UserService } from '../../services/user.service';
 import { Router, RouterLink } from '@angular/router';
 import { User } from '../../models/user';
 import { HttpErrorResponse } from '@angular/common/http';
+import { NgClass } from '@angular/common';
 
 @Component({
   selector: 'app-register',
-  imports: [ReactiveFormsModule, RouterLink],
+  imports: [ReactiveFormsModule, RouterLink, NgClass],
   templateUrl: './register.component.html',
   styleUrl: './register.component.css'
 })
@@ -18,6 +19,7 @@ export class RegisterComponent {
 
   form: FormGroup;
   error: string | null = null;
+  regFail: boolean = false;
 
   constructor() {
     this.form = this.fb.group({
@@ -40,13 +42,15 @@ export class RegisterComponent {
   }
 
   onSubmit() {
+    this.regFail = false;
     if (this.form.invalid) {
+      this.markAllFields();
       if (this.form.errors?.['passwordMismatch']) {
         this.error = "Passwords do not match";
+        this.regFail = true;
       } else {
         this.error = "Missing fields";
       }
-      this.form.markAllAsTouched();
       return;
     };
 
@@ -64,7 +68,21 @@ export class RegisterComponent {
         } catch {
           this.error = "Registration failure";
         }
+        this.markAllFields();
+        this.regFail = true;
       }
+    })
+  }
+
+  invalidInp(controlName : string) : boolean {
+    let control = this.form.get(controlName);
+    return !!(control && control.invalid && (control.dirty || control.touched) || this.regFail);
+  }
+
+  private markAllFields() : void {
+    Object.values(this.form.controls).forEach(control => {
+      control.markAsTouched();
+      control.markAsDirty();
     })
   }
 
