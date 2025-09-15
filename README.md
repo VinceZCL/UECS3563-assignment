@@ -33,9 +33,10 @@ make kill
 ### For Development Purpose
 `make npm` to install npm dependencies for local development.
 You do not this to run this to start the server.
-`make dev` support hot-reloading.
-**backend** via **Spring DevTools**
-**frontend** via **Angular**
+
+`make dev` supports hot-reloading:
+* **backend** via **Spring DevTools**
+* **frontend** via **Angular**
 
 ### Rebuild Docker Images
 `make image` to rebuild docker images without cache.
@@ -56,8 +57,8 @@ Windows Users has many options.
 ## Troubleshooting
 ### Docker Error
 > unable to get image 'assignment-backend': error during connect: Get "http://%2F%2F.%2Fpipe%2FdockerDesktopLinuxEngine/v1.51/images/assignment-backend/json": open //./pipe/dockerDesktopLinuxEngine: The system cannot find the file specified.
-
-Ensure that **Docker Engine** is up and running by starting **Docker Desktop**
+1. Ensure that **Docker Engine** is up and running by starting **Docker Desktop**.
+2. Ensure a stable internet connection is available for fetching docker images.
 
 ### Unresponsive Backend
 **Java Spring Boot** takes a bit of time to compile and get running. To view the progress, run
