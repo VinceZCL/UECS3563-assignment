@@ -68,5 +68,5 @@ docker compose logs -f backend
 ```
 
 ### Slow startup
-The **Angular image** might take a lot of time in the `npm install` stage.
+The **Angular image** might take a lot of time in the `npm install` stage.  
 However, that will only be in the first boot, as the `node_modules` will be stored within a **Docker Volume**.
