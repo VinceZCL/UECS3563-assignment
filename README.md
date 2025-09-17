@@ -1,4 +1,5 @@
 # UECS3563 Assignment
+**Title:** *Web-Based Scrum Management Tool*
 
 ## Features
 * **PostgreSQL** Database
@@ -14,7 +15,7 @@
 
 ## Requirements
 * **Docker** & **Docker Compose**, may be installed via [**Docker Desktop**](https://www.docker.com/products/docker-desktop/)
-* (Optional) **Make**, may be installed via package managers (apt, pacman, etc.) or [**Make for Windows**](https://gnuwin32.sourceforge.net/packages/make.htm)
+* **Make**, may be installed via package managers (apt, pacman, etc.) or [**Make for Windows**](https://gnuwin32.sourceforge.net/packages/make.htm)
 
 ## QuickStart
 ### For Unix / WSL Users
@@ -43,11 +44,11 @@ You do not this to run this to start the server.
 
 ## For Windows Users
 Windows Users has many options.
-1. Use [**Make for Windows**](https://gnuwin32.sourceforge.net/packages/make.htm)
+1. Install [**Windows Subsystem for Linux**](https://learn.microsoft.com/en-us/windows/wsl/install)
 
 **OR**
 
-2. Replicate the commands found in [`Makefile`](Makefile)
+2. Use [**Make for Windows**](https://gnuwin32.sourceforge.net/packages/make.htm)
 
 ## Documentation
 ### This project uses springdoc-openapi to generate OpenAPI 3 documentation for REST endpoints.
@@ -58,7 +59,7 @@ Windows Users has many options.
 ### Docker Error
 > unable to get image 'assignment-backend': error during connect: Get "http://%2F%2F.%2Fpipe%2FdockerDesktopLinuxEngine/v1.51/images/assignment-backend/json": open //./pipe/dockerDesktopLinuxEngine: The system cannot find the file specified.
 1. Ensure that **Docker Engine** is up and running by starting **Docker Desktop**.
-2. Ensure a stable internet connection is available for fetching docker images.
+2. Ensure a stable internet connection is available for fetching **Docker images**.
 
 ### Unresponsive Backend
 **Java Spring Boot** takes a bit of time to compile and get running. To view the progress, run
