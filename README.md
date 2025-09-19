@@ -72,5 +72,5 @@ The **Angular image** might take a lot of time in the `npm install` stage.
 However, that will only be in the first boot, as the `node_modules` will be stored within a **Docker Volume**.
 
 ## Evaluation and Analysis
-As per section 5 of the assignment requirements
+As per section 5 of the assignment requirements  
 The Questions and Answers are in [`report.md`](report.md)
