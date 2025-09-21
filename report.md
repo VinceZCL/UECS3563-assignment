@@ -23,7 +23,7 @@ All other components are displayed within the `<router-outlet>` component with e
 
 ### Bindings and Directives
 Bindings are primary for data displaying, with the most common being interpolation `{{ property }}`  
-Another form of binding done is using `formControl` to 
+Another form of binding done is using `formControl` to facilitate user inputs based on needed values  
 With directives such as `@if` to check if certain data is available, or check roles for **Role-Based Access Control**  
 Another directive being `@for` is used to display large amount of data, such as the Scrum reports of this assignment  
 
