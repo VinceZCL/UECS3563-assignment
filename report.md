@@ -75,5 +75,5 @@ Otherwise, **Artificial Intelligence** is solely used for the generation of **CS
 
 ### Use of Docker
 Working as an intern has allowed me to directly experience using **Docker**, starting images and even writing and creating them  
-While **DreamCatcher Consulting** had also provided a workshop for using **Docker**, the **Docker** system implemented within this project was done before, in which you may check the *Commit Logs* for proof  
+While **DreamCatcher Consulting** had also provided a workshop for using **Docker**, the **Docker** system implemented within this project was done before, in which you may check the [*Commit Logs*](https://github.com/VinceZCL/UECS3563-assignment/commits/main/) for proof  
 The reason **Docker** was employed was due to ease of distribution, where it could be easily shared to others, primarily the examiners for this assignment  
